@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\MirrorBehavior.cs" />
      <Compile Include="Assets\Scripts\PlayerBehavior.cs" />
      <Compile Include="Assets\Scripts\ShotBehavior.cs" />
+     <Compile Include="Assets\UnlockedCamera.cs" />
      <None Include="Assets\2DLightAsset\Shaders\Gradient-NoTexture-Radial-SingleColor-ToTransparent-RegularUV-AlphaBlend.shader" />
      <None Include="Assets\2DLightAsset\Shaders\NoTexture.shader" />
  <Reference Include="UnityEngine.UI">
@@ -63,7 +64,7 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="pseudoSinCos">
- <HintPath>C:/Users/pyroa_000/Desktop/LightFight Test/Assets/2DLightAsset/Scripts/Helpers/pseudoSinCos.dll</HintPath>
+ <HintPath>C:/Users/pyroa_000/Desktop/Git_Lightfight/LightFight/LightFight Test/Assets/2DLightAsset/Scripts/Helpers/pseudoSinCos.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
