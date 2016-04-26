@@ -4,39 +4,52 @@ using System.Collections;
 public class ShotBehavior : MonoBehaviour {
 
 	public float speed;
-
+    public float minLiving;
+    private bool isLive;
+    private float timeLive;
 	private Rigidbody2D rb2d;
 	// Use this for initialization
 	void Start () 
 	{
 		rb2d = GetComponent<Rigidbody2D> ();
 		rb2d.velocity = transform.up * speed;
-	}
+        timeLive = Time.time + minLiving;
+    }
 
-	// Deletes upon hitting wall
+    void Update()
+    {
+        if (Time.time > timeLive) isLive = true;
+    }
+
+	// How a shot will handle interaction with each material.
 	void OnCollisionEnter2D(Collision2D otherObj) {
-		if (otherObj.gameObject.tag == "Border")
+        // Deletes itself on collision with Wall.
+        if (otherObj.gameObject.tag == "Border")
 			Destroy (gameObject);
 
+        // Hopefully will reflect on collision with Mirrors
 		if (otherObj.gameObject.tag == "Mirror")
         {
-            /* r = i−2(i·n)n
-             * Source: http://stanford.io/1zco8xk
-             * where n is the vector perpendicular to the mirror,
-             * r is the vector exiting the mirror,
-             * and i is the vector hitting the mirror
-             */
-            Vector3 enterVelocity = rb2d.velocity; // n
-            Vector3 exitVelocity = new Vector3(0,0,0); // r
-            Quaternion rotation = Quaternion.Euler(exitVelocity);
+            if (isLive)
+            {
+                float m = otherObj.transform.rotation.eulerAngles.z;
+                float a = transform.rotation.eulerAngles.z;
+                float theta = ((2 * m) - a) + 180;  // Thank you TJ For helping me work out math.
+                Instantiate(gameObject, transform.position, Quaternion.AngleAxis(theta, transform.forward));
+                Destroy(gameObject);
+            }
+        }
+
+        // For now, bolts destroy each other.
+        if (otherObj.gameObject.tag == "Bolt")
+        {
+            Destroy(otherObj.gameObject);
             Destroy(gameObject);
-            ContactPoint2D contactPoint = otherObj.contacts[0];
-            Instantiate(gameObject, contactPoint.point, gameObject.transform.rotation);
-            /*
-             * As of right now, they are colliding constantly with the mirror
-             * once they hit it. That's bad. However that doens't explain why they
-             * don't move even if they're sent to the origin.
-             */
+        }
+
+        if (otherObj.gameObject.tag == "Player")
+        {
+            Destroy(gameObject);
         }
 	}
 
