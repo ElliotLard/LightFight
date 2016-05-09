@@ -50,14 +50,25 @@
      <Compile Include="Assets\2DLightAsset\Scripts\Helpers\interface_touch.cs" />
      <Compile Include="Assets\2DLightAsset\Scripts\Helpers\interface_touch2.cs" />
      <Compile Include="Assets\2DLightAsset\Scripts\rotate.cs" />
+     <Compile Include="Assets\CooldownBox.cs" />
+     <Compile Include="Assets\FlareBehavior.cs" />
+     <Compile Include="Assets\HealthBar.cs" />
+     <Compile Include="Assets\PrismBomb.cs" />
      <Compile Include="Assets\Scripts\Guns\Gun.cs" />
+     <Compile Include="Assets\Scripts\Guns\Pistol.cs" />
      <Compile Include="Assets\Scripts\Guns\Shotgun.cs" />
      <Compile Include="Assets\Scripts\MMButton.cs" />
      <Compile Include="Assets\Scripts\MirrorBehavior.cs" />
      <Compile Include="Assets\Scripts\PlayerBehavior.cs" />
      <Compile Include="Assets\Scripts\ShotBehavior.cs" />
-     <Compile Include="Assets\TestTurret.cs" />
-     <Compile Include="Assets\UnlockedCamera.cs" />
+     <Compile Include="Assets\Scripts\TestTurret.cs" />
+     <Compile Include="Assets\Scripts\Tools\FiringMirrorBehavior.cs" />
+     <Compile Include="Assets\Scripts\Tools\MirrorGun.cs" />
+     <Compile Include="Assets\Scripts\Tools\Tool.cs" />
+     <Compile Include="Assets\Scripts\Top Level Stuff\FollowCam.cs" />
+     <Compile Include="Assets\Scripts\Top Level Stuff\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Top Level Stuff\Team.cs" />
+     <Compile Include="Assets\Scripts\Top Level Stuff\UnlockedCamera.cs" />
      <None Include="Assets\2DLightAsset\Shaders\Gradient-NoTexture-Radial-SingleColor-ToTransparent-RegularUV-AlphaBlend.shader" />
      <None Include="Assets\2DLightAsset\Shaders\NoTexture.shader" />
  <Reference Include="UnityEngine.UI">
@@ -67,7 +78,7 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="pseudoSinCos">
- <HintPath>C:/Users/pyroa_000/Desktop/Git_Lightfight/LightFight/LightFight Test/Assets/2DLightAsset/Scripts/Helpers/pseudoSinCos.dll</HintPath>
+ <HintPath>C:/Users/pyroa_000/Desktop/Git_Lightfight_2/LightFight/LightFight Test/Assets/2DLightAsset/Scripts/Helpers/pseudoSinCos.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

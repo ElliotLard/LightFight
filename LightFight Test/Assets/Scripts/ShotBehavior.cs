@@ -3,23 +3,31 @@ using System.Collections;
 
 public class ShotBehavior : MonoBehaviour {
 
-	public float speed;
-    public float minLiving;
-    private bool isLive;
-    private float timeLive;
+	public float speed;     // The speed that the bullet will move
+    public float minLiving; // How long it must exist until it can reflect.
+    public int damage; // how much damage a shot will do and Damn i need to extend this class.
+
+    private bool isLive;    // Is able to reflect.
+    private float timeLive; // In-game time when the bullet will be alive.
 	private Rigidbody2D rb2d;
-	// Use this for initialization
+	
+
 	void Start () 
 	{
 		rb2d = GetComponent<Rigidbody2D> ();
 		rb2d.velocity = transform.up * speed;
-        timeLive = Time.time + minLiving;
+        timeLive = Time.time; // + minLiving;
+        Physics2D.IgnoreLayerCollision(8, 8); // This means bullets can't touch bullets.
     }
 
     void Update()
     {
-        if (Time.time > timeLive) isLive = true; // "Live" basically means allowed to reflect.
-        if (rb2d.velocity.magnitude < .2) Destroy(gameObject); // Temporary line for Testing Shotgun Shells
+        if (Time.time <= timeLive)
+            isLive = false; // "Live" basically means allowed to reflect.
+        else
+            isLive = true;
+
+        if (rb2d.velocity.magnitude < .5) Destroy(gameObject); // Temporary line for Testing Shotgun Shells
     }
 
 	// How a shot will handle interaction with each material.
@@ -33,19 +41,18 @@ public class ShotBehavior : MonoBehaviour {
         {
             if (isLive)
             {
-                float m = otherObj.transform.rotation.eulerAngles.z;
-                float a = transform.rotation.eulerAngles.z;
+                float m = otherObj.transform.rotation.eulerAngles.z; // Angle of the mirror
+                float a = transform.rotation.eulerAngles.z;          // Angle of the bolt
                 float theta = ((2 * m) - a) + 180;  // Thank you TJ For helping me work out math.
-                Instantiate(gameObject, transform.position, Quaternion.AngleAxis(theta, transform.forward));
-                Destroy(gameObject);
+                
+                // Rotates the bolt, and resets the life timer.
+                transform.rotation = Quaternion.AngleAxis(theta, transform.forward);
+                rb2d.velocity = transform.up * rb2d.velocity.magnitude;
+                timeLive = Time.time + minLiving;
+            } else
+            {
+                Destroy(gameObject);     
             }
-        }
-
-        // For now, bolts destroy each other.
-        if (otherObj.gameObject.tag == "Bolt")
-        {
-            Destroy(otherObj.gameObject);
-            Destroy(gameObject);
         }
 
         if (otherObj.gameObject.tag == "Player")

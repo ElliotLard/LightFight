@@ -1,15 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class Gun : MonoBehaviour {
+public abstract class Gun : NetworkBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public float fireRate; // Time in seconds between shots
+    private float nextFire;
+    public GameObject shotType;
+
+    public void AttemptFire()
+    {
+        if (Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+            CmdFire();
+        }
+    }
+
+    //[Command]
+    public abstract void CmdFire();
 }
