@@ -18,7 +18,8 @@ public class ShotBehavior : MonoBehaviour {
 
     void Update()
     {
-        if (Time.time > timeLive) isLive = true;
+        if (Time.time > timeLive) isLive = true; // "Live" basically means allowed to reflect.
+        if (rb2d.velocity.magnitude < .2) Destroy(gameObject); // Temporary line for Testing Shotgun Shells
     }
 
 	// How a shot will handle interaction with each material.
@@ -27,7 +28,7 @@ public class ShotBehavior : MonoBehaviour {
         if (otherObj.gameObject.tag == "Border")
 			Destroy (gameObject);
 
-        // Hopefully will reflect on collision with Mirrors
+        // Reflects on collision with Mirrors
 		if (otherObj.gameObject.tag == "Mirror")
         {
             if (isLive)
