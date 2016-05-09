@@ -19,7 +19,7 @@ public class ShotBehavior : MonoBehaviour {
     void Update()
     {
         if (Time.time > timeLive) isLive = true; // "Live" basically means allowed to reflect.
-        if (rb2d.velocity.magnitude < .2) Destroy(gameObject); // Temporary line for Testing Shotgun Shells
+        if (rb2d.velocity.magnitude < .3) Destroy(gameObject); // Temporary line for Testing Shotgun Shells
     }
 
 	// How a shot will handle interaction with each material.
@@ -44,8 +44,11 @@ public class ShotBehavior : MonoBehaviour {
         // For now, bolts destroy each other.
         if (otherObj.gameObject.tag == "Bolt")
         {
-            Destroy(otherObj.gameObject);
-            Destroy(gameObject);
+            if (isLive)
+            {
+                Destroy(otherObj.gameObject);
+                Destroy(gameObject);
+            }
         }
 
         if (otherObj.gameObject.tag == "Player")
